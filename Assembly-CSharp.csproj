@@ -65,18 +65,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Items\ArrowController.cs" />
-    <Compile Include="Assets\Scripts\Items\ArrowHitController.cs" />
     <Compile Include="Assets\Scripts\Items\FistController.cs" />
     <Compile Include="Assets\Scripts\Items\PortalController.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerProperty.cs" />
-    <Compile Include="Assets\Scripts\Players\PlayerSound.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerUI.cs" />
+    <Compile Include="Assets\Scripts\Sound Effect\ArrowHitSound.cs" />
+    <Compile Include="Assets\Scripts\Sound Effect\ButtonClickSound.cs" />
+    <Compile Include="Assets\Scripts\Sound Effect\LavaLargeSound.cs" />
+    <Compile Include="Assets\Scripts\Sound Effect\LavaSmallSound.cs" />
+    <Compile Include="Assets\Scripts\Sound Effect\PlayerSound.cs" />
     <Compile Include="Assets\Scripts\System\AudioManager.cs" />
     <Compile Include="Assets\Scripts\System\ByteBuffer.cs" />
     <Compile Include="Assets\Scripts\System\GameManager.cs" />
     <Compile Include="Assets\Scripts\System\GameSocketClient.cs" />
-    <Compile Include="Assets\Scripts\UI\ButtonTransform.cs" />
+    <Compile Include="Assets\Scripts\UI\Buttons\ButtonTransform.cs" />
     <Compile Include="Assets\Scripts\UI\Buttons\RoomButton.cs" />
     <Compile Include="Assets\Scripts\UI\InputFieldFilter.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\ConnectionPanel.cs" />

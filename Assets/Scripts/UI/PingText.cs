@@ -46,7 +46,7 @@ public class PingText : MonoBehaviour
                         }
                         ping.DestroyPing();
                         ping = null;
-                        Invoke(nameof(ShowPing), 2.0f); // "ping" server per 2 second
+                        Invoke(nameof(ShowPing), 2.0f); // "ping" server per 2 seconds
                 }
         }
 

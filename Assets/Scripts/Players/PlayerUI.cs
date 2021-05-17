@@ -4,9 +4,10 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
         public Vector2 offset;
-        public Text nameUI; // following name UI component
-        public Image healthUI; // following health UI component
-        public Image injuryUI; // following injury UI component
+        public Image injuryImage; // following UI component
+        public Image healthImage; // following UI component
+        public Text nameText; // following UI component
+        public GameObject youTitle; // following UI component
         public PlayerSound playerSound;
 
         Vector2 screenPosition;
@@ -37,29 +38,31 @@ public class PlayerUI : MonoBehaviour
                 {
                         health -= receivedRangedDamage;
                         playerAnimator.SetFloat("Health", health);
-                        healthUI.fillAmount = health / maxHealth;
-                        playerSound.HurtAudioPlay();
+                        healthImage.fillAmount = health / maxHealth;
+                        playerSound.PlayHurtAudio();
                 }
                 if (collision.name == "Fist(Clone)" && collision.transform.parent != transform)
                 {
                         health -= receivedMeleeDamage;
                         playerAnimator.SetFloat("Health", health);
-                        healthUI.fillAmount = health / maxHealth;
-                        playerSound.HurtAudioPlay();
+                        healthImage.fillAmount = health / maxHealth;
+                        playerSound.PlayHurtAudio();
                 }
         }
 
         void SetUIPosition()
         {
                 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-                healthUI.rectTransform.position = screenPosition + offset;
-                injuryUI.rectTransform.position = screenPosition + offset;
-                nameUI.rectTransform.position = screenPosition - offset * 1.3f;
+                healthImage.rectTransform.position = screenPosition + offset;
+                injuryImage.rectTransform.position = screenPosition + offset;
+                nameText.rectTransform.position = screenPosition - offset * 1.5f;
+                youTitle.transform.position = screenPosition + offset * 1.8f;
         }
 
         // when player dies, make it not to move
         void ChangeToStatic()
         {
+                playerSound.PlayDeathAudio();
                 Rigidbody2D playerRB = GetComponent<Rigidbody2D>();
                 playerRB.bodyType = RigidbodyType2D.Static;
         }

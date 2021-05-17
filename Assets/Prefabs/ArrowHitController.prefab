@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9140638729099716219}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3108885, y: -7.320326, z: 0}
+  m_LocalPosition: {x: -32.556564, y: 14.800301, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -69,10 +69,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 10
+  MaxDistance: 25
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -80,16 +80,52 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.4235748
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -2.5009959
+      outSlope: -2.5009959
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.43870342
+      value: 0.6638887
+      inSlope: -11.443807
+      outSlope: -11.443807
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.28839058
     - serializedVersion: 3
-      time: 1
+      time: 0.45567143
+      value: 0.29301804
+      inSlope: -9.80662
+      outSlope: -9.80662
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2194343
+    - serializedVersion: 3
+      time: 0.4932068
+      value: 0.13044739
+      inSlope: -1.1214833
+      outSlope: -1.1214833
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.38022217
+    - serializedVersion: 3
+      time: 0.7757721
+      value: 0.021728516
+      inSlope: -0.14745593
+      outSlope: -0.14745593
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.49598724
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9764044
       value: 0
       inSlope: 0
       outSlope: 0
@@ -105,7 +141,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

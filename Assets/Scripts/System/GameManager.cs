@@ -16,13 +16,15 @@ public class GameManager : MonoBehaviour
         PlayerController playerController;
         GameObject[] players;
         Text playerNameText;
+        GameObject youTitle;
         bool showPausePanel;
 
         void Awake()
         {
                 clientProperty = GameObject.Find("ClientProperty");
                 gameSocketClient = clientProperty.GetComponent<GameSocketClient>();
-                playerNameText = playerPrefab.transform.Find("Canvas/Name").GetComponent<Text>();
+                playerNameText = playerPrefab.transform.Find("Canvas/NameText").GetComponent<Text>();
+                youTitle = playerPrefab.transform.Find("Canvas/YouTitle").gameObject;
                 playerController = playerPrefab.transform.Find("Player").GetComponent<PlayerController>();
         }
 
@@ -38,12 +40,14 @@ public class GameManager : MonoBehaviour
                         playerPrefab.transform.position = playerSpawn[int.Parse(spawnMessage[i].Split('=')[1])].transform.position; // player's position
                         if (i.ToString() != playerIndex) // if player who is got from message is not current client player
                         {
+                                youTitle.SetActive(false);
                                 playerController.enabled = false; // it should not be controlled by current client's keyboard
                                 players[i] = Instantiate(playerPrefab);
                                 players[i].transform.SetParent(playersCollection.transform); // set parent to forbid UI layer higher than Canvas
                         }
                         else
                         {
+                                youTitle.SetActive(true);
                                 playerController.enabled = true;
                                 GameObject currentPlayer = Instantiate(playerPrefab);  // initialize player
                                 currentPlayer.transform.SetParent(playersCollection.transform); // set parent to forbid UI layer higher than Canvas
