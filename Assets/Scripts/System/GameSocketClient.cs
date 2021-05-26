@@ -9,14 +9,23 @@ using TinyWarriorInfo;
 public class GameSocketClient : MonoBehaviour
 {
         public PanelManager panelManager;
+        public GameManager gameManager;
         public Socket clientSocket;
         public List<RoomInfo> roomsInfo;
         public RoomInfo roomEnteredInfo;
+        public PlayerAction playerAction;
         public string startMessage;
-        public string playerIndex;
+        public string yourIndex;
 
+        SucceedingCanvas succeedingCanvas;
         Thread receiveThread;
-        private static byte[] result = new byte[2048]; // decide how many rooms can be received
+        private static byte[] result = new byte[4096]; // decide how many roomsInfo and playerAction can be received
+
+        void Start()
+        {
+                panelManager = GameObject.Find("PanelManager").GetComponent<PanelManager>();
+                succeedingCanvas = panelManager.succeedingCanvas.GetComponent<SucceedingCanvas>();
+        }
 
         #region -- Public Function --
 
@@ -116,27 +125,34 @@ public class GameSocketClient : MonoBehaviour
                                 {
                                         try
                                         {
-                                                roomEnteredInfo = (RoomInfo)obj;
-                                                // Here shows panel and set get data and differs from getting List<roomInfo> that show rooms panel by connect button
-                                                if (!panelManager.IsShowingRoomEnteredPanelState())
-                                                {
-                                                        panelManager.ShowRoomEnteredPanel();
-                                                }
-                                                else
-                                                {
-                                                        panelManager.RefreshRoomEnteredPanel();
-                                                }
+                                                playerAction = (PlayerAction)obj;
                                         }
                                         catch
                                         {
                                                 try
                                                 {
-                                                        roomsInfo = (List<RoomInfo>)obj;
-                                                        panelManager.RefreshRoomsPanel();
+                                                        roomEnteredInfo = (RoomInfo)obj;
+                                                        // Here shows panel and set get data and differs from getting List<roomInfo> that show rooms panel by connect button
+                                                        if (!panelManager.IsShowingRoomEnteredPanelState())
+                                                        {
+                                                                panelManager.ShowRoomEnteredPanel();
+                                                        }
+                                                        else
+                                                        {
+                                                                panelManager.RefreshRoomEnteredPanel();
+                                                        }
                                                 }
-                                                catch (Exception ex)
+                                                catch
                                                 {
-                                                        panelManager.ShowConnectionPanel("获取对象有误. " + ex.Message);
+                                                        try
+                                                        {
+                                                                roomsInfo = (List<RoomInfo>)obj;
+                                                                panelManager.RefreshRoomsPanel();
+                                                        }
+                                                        catch (Exception ex)
+                                                        {
+                                                                succeedingCanvas.ShowTipsPanel("获取对象有误. " + ex.Message);
+                                                        }
                                                 }
                                         }
                                         continue;
@@ -149,7 +165,7 @@ public class GameSocketClient : MonoBehaviour
                         }
                         catch
                         {
-                                panelManager.ShowConnectionPanel("已断开与服务器的连接！");
+                                succeedingCanvas.ShowTipsPanel("已断开与服务器的连接！");
                                 mServerSocket.Close();
                                 break;
                         }
@@ -166,18 +182,33 @@ public class GameSocketClient : MonoBehaviour
                 }
                 if (message.StartsWith("index="))
                 {
-                        playerIndex = message.Remove(0, 6);
+                        yourIndex = message.Remove(0, 6);
+                        return;
+                }
+                if (message.StartsWith("winner="))
+                {
+                        gameManager.ShowVictoryPanel(message.Remove(0, 7));
+                        return;
+                }
+                if (message.StartsWith("dead="))
+                {
+                        gameManager.UpdatePlayerDead(message.Remove(0, 5));
+                        return;
+                }
+                if (message.StartsWith("leaver="))
+                {
+                        gameManager.UpdatePlayerLeaver(message.Remove(0, 7));
                         return;
                 }
                 switch (message)
                 {
                         case "ownerleft":
-                                panelManager.ShowConnectionPanel("房主离开了当前房间！");
+                                succeedingCanvas.ShowTipsPanel("房主离开了当前房间！");
                                 panelManager.HideRoomEnteredPanel();
                                 SendMsgToServer("getrooms");
                                 break;
                         default:
-                                panelManager.ShowConnectionPanel("服务器消息：" + message);
+                                succeedingCanvas.ShowTipsPanel("服务器消息：" + message);
                                 break;
                 }
         }

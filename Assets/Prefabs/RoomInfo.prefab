@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.01713243, g: 0.7264151, b: 0.10457824, a: 1}
+  m_Color: {r: 0.01713243, g: 0.7264151, b: 0.1045782, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -76,7 +76,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Waiting...
+  m_Text: "\u7B49\u5F85\u4E2D..."
 --- !u!1 &3305567423909838548
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,9 +153,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Room
-
-'
+  m_Text: 1
 --- !u!1 &3305567423919045571
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10/10
+  m_Text: 1/10
 --- !u!1 &3305567424020869671
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a491673364b9ef344979c59cfac6fbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomAddress: 
+  roomAddress: 127.0.0.1:49326
 --- !u!114 &3305567424020869666
 MonoBehaviour:
   m_ObjectHideFlags: 0

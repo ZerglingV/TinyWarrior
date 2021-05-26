@@ -19,6 +19,9 @@ public class RoomsPanel : MonoBehaviour
         List<RoomInfo> roomsInfo;
         bool isInitialized;
 
+        Color redColor;
+        Color greenColor;
+
         void Awake()
         {
                 roomNameText = roomInfoPrefab.transform.Find("RoomName").GetComponent<Text>();
@@ -27,6 +30,9 @@ public class RoomsPanel : MonoBehaviour
                 roomButton = roomInfoPrefab.transform.GetComponent<RoomButton>();
                 gameSocketClient = clientProperty.GetComponent<GameSocketClient>();
                 isInitialized = true;
+
+                redColor = new Color(0.7254902f, 0.01568629f, 0.0864033f);
+                greenColor = new Color(0.01713243f, 0.7264151f, 0.1045782f);
         }
 
         void OnEnable()
@@ -82,14 +88,14 @@ public class RoomsPanel : MonoBehaviour
                                 if (roomInfo.IsStart)
                                 {
                                         roomStateText.text = "游玩中...";
-                                        roomStateText.color = new Color(0.7254902f, 0.01568629f, 0.0864033f);
+                                        roomStateText.color = redColor;
                                 }
                                 else
                                 {
                                         roomStateText.text = "等待中...";
-                                        roomStateText.color = new Color(0.01713243f, 0.7264151f, 0.1045782f);
+                                        roomStateText.color = greenColor;
                                 }
-                                numberInfoText.text = roomInfo.GuestsAddressAndName.Count + "/" + roomInfo.MaxPlayer;
+                                numberInfoText.text = roomInfo.GuestsAddressAndName.Count + "/" + roomInfo.MaxPlayerNumber;
                                 roomNameText.text = roomInfo.RoomName;
                                 roomButton.roomAddress = roomInfo.OwnerAddress;
 

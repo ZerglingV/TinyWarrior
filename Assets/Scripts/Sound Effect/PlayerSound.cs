@@ -7,6 +7,7 @@ public class PlayerSound : MonoBehaviour
         public AudioClip rangedAttack;
         public AudioClip[] meleeAttack;
         public AudioClip[] playerHurt;
+        public AudioClip[] playerHurtYell;
         public AudioClip[] death;
 
         bool isPlayWalkAudioing;
@@ -14,10 +15,14 @@ public class PlayerSound : MonoBehaviour
         bool isPlayMeleeAttackAudioing;
 
         AudioSource playerSource;
+        AudioSource playerHurtSource1;
+        AudioSource playerHurtSource2;
 
         void Awake()
         {
-                playerSource = GetComponent<AudioSource>();
+                playerSource = GetComponents<AudioSource>()[0];
+                playerHurtSource1 = GetComponents<AudioSource>()[1];
+                playerHurtSource2 = GetComponents<AudioSource>()[2];
         }
 
         public void PlayWalkAudio()
@@ -75,9 +80,12 @@ public class PlayerSound : MonoBehaviour
 
         public void PlayHurtAudio()
         {
-                int index = Random.Range(0, playerHurt.Length);
-                playerSource.clip = playerHurt[index];
-                playerSource.Play();
+                int index1 = Random.Range(0, playerHurt.Length);
+                playerHurtSource1.clip = playerHurt[index1];
+                playerHurtSource1.Play();
+                int index2 = Random.Range(0, playerHurtYell.Length);
+                playerHurtSource2.clip = playerHurtYell[index2];
+                playerHurtSource2.Play();
         }
 
         public void PlayDeathAudio()

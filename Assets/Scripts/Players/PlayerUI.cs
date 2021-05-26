@@ -1,65 +1,101 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-        public Vector2 offset;
-        public Image injuryImage; // following UI component
+        public Image hurtDurationImage; // following UI component
         public Image healthImage; // following UI component
-        public Text nameText; // following UI component
-        public GameObject youTitle; // following UI component
         public PlayerSound playerSound;
+        public float hurtDuration;
+        public float hurtSpiteDuration;
 
-        Vector2 screenPosition;
+        GameSocketClient gameSocketClient;
+        GameManager gameManager;
+        PlayerProperty playerProperty;
         Animator playerAnimator;
-        float health;
-        float maxHealth;
+        Collider2D playerCollider;
+
         float receivedMeleeDamage;
         float receivedRangedDamage;
+        float maxHealth;
+        float health;
+        float hurtSpriteCount;
+
+        SpriteRenderer sprite;
 
         void Awake()
         {
-                maxHealth = GetComponent<PlayerProperty>().maxHealth;
-                receivedMeleeDamage = GetComponent<PlayerProperty>().receivedMeleeDamage;
-                receivedRangedDamage = GetComponent<PlayerProperty>().receivedRangedDamage;
+                gameSocketClient = GameObject.Find("ClientProperty").GetComponent<GameSocketClient>();
+                gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+                playerProperty = GetComponent<PlayerProperty>();
                 playerAnimator = GetComponent<Animator>();
-                playerAnimator.SetFloat("Health", maxHealth);
+                playerCollider = GetComponent<Collider2D>();
+
+                receivedMeleeDamage = playerProperty.receivedMeleeDamage;
+                receivedRangedDamage = playerProperty.receivedRangedDamage;
+                maxHealth = playerProperty.maxHealth;
                 health = maxHealth;
+                playerAnimator.SetFloat("Health", maxHealth);
+
+                sprite = GetComponent<SpriteRenderer>();
         }
 
-        void FixedUpdate()
+        void Update()
         {
-                SetUIPosition();
+                if (hurtSpriteCount <= 0)
+                {
+                        sprite.material.SetFloat("_FlashAmount", 0);
+                }
+                else
+                {
+                        hurtSpriteCount -= Time.deltaTime;
+                }
+                if (hurtDurationImage.fillAmount >= healthImage.fillAmount)
+                {
+                        hurtDurationImage.fillAmount -= hurtDuration;
+                }
+                else
+                {
+                        hurtDurationImage.fillAmount = healthImage.fillAmount;
+                }
         }
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-                if (collision.name == "Arrow(Clone)" && collision.transform.parent != transform)
+                if (collision.name == "Arrow(Clone)")
                 {
-                        health -= receivedRangedDamage;
-                        playerAnimator.SetFloat("Health", health);
-                        healthImage.fillAmount = health / maxHealth;
-                        playerSound.PlayHurtAudio();
+                        if (collision.GetComponent<ArrowController>().parentCollision != playerCollider)
+                        {
+                                health -= receivedRangedDamage;
+                                playerAnimator.SetFloat("Health", health);
+                                healthImage.fillAmount = health / maxHealth;
+                                HurtShader();
+                                playerSound.PlayHurtAudio();
+                        }
                 }
                 if (collision.name == "Fist(Clone)" && collision.transform.parent != transform)
                 {
                         health -= receivedMeleeDamage;
                         playerAnimator.SetFloat("Health", health);
                         healthImage.fillAmount = health / maxHealth;
+                        HurtShader();
                         playerSound.PlayHurtAudio();
+                }
+                if (health <= 0 && gameObject.name.Replace("Player", "") == gameSocketClient.yourIndex)
+                {
+                        gameManager.YourPlayerDead();
                 }
         }
 
-        void SetUIPosition()
+        void HurtShader()
         {
-                screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-                healthImage.rectTransform.position = screenPosition + offset;
-                injuryImage.rectTransform.position = screenPosition + offset;
-                nameText.rectTransform.position = screenPosition - offset * 1.5f;
-                youTitle.transform.position = screenPosition + offset * 1.8f;
+                sprite.material.SetFloat("_FlashAmount", 1);
+                hurtSpriteCount = hurtSpiteDuration;
         }
 
-        // when player dies, make it not to move
+        // when player dies, make it can not move
         void ChangeToStatic()
         {
                 playerSound.PlayDeathAudio();
@@ -69,6 +105,6 @@ public class PlayerUI : MonoBehaviour
 
         void Die()
         {
-                Destroy(transform.parent.gameObject);
+                Destroy(transform.gameObject);
         }
 }

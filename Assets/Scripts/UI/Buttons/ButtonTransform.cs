@@ -18,8 +18,15 @@ public class ButtonTransform : MonoBehaviour
                 currentButton = GetComponent<Button>();
                 buttonImage = currentButton.GetComponent<Image>();
                 buttonText = currentButton.GetComponentInChildren<Text>();
-                normalPosition = buttonText.transform.position;
-                pressedPosition = new Vector2(normalPosition.x, normalPosition.y - offesetY);
+                RefreshTextPosition();
+        }
+
+        void OnGUI()
+        {
+                if (buttonText.transform.position.x != normalPosition.x)
+                {
+                        RefreshTextPosition();
+                }
         }
 
         public void TextShiftDown()
@@ -32,5 +39,11 @@ public class ButtonTransform : MonoBehaviour
         {
                 buttonImage.sprite = normalImage;
                 buttonText.transform.position = normalPosition;
+        }
+
+        void RefreshTextPosition()
+        {
+                normalPosition = buttonText.transform.position;
+                pressedPosition = new Vector2(normalPosition.x, normalPosition.y - offesetY);
         }
 }

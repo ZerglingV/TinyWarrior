@@ -4,33 +4,42 @@ public class PlayerController : MonoBehaviour
 {
         public GameObject arrow;
         public GameObject fist;
+        public bool canControl;
 
+        PlayerProperty playerProperty;
         Rigidbody2D playerRB;
         Animator playerAnimator;
         Vector2 movement;
+        float moveSpeed;
         bool canCreateArrow = true;
         bool canCreateFist = true;
-        float moveSpeed;
 
         void Awake()
         {
-                moveSpeed = GetComponent<PlayerProperty>().moveSpeed;
+                playerProperty = GetComponent<PlayerProperty>();
+                moveSpeed = playerProperty.moveSpeed;
                 playerRB = GetComponent<Rigidbody2D>();
                 playerAnimator = GetComponent<Animator>();
         }
 
         void Update()
         {
-                MeleeAttack();
-                RangedAttack();
+                if (canControl)
+                {
+                        MeleeAttack();
+                        RangedAttack();
+                }
         }
 
         void FixedUpdate()
         {
-                if (!playerAnimator.GetBool("MeleeAttack") && !playerAnimator.GetBool("RangedAttack"))
+                if (canControl)
                 {
-                        Movement();
-                        SwitchAnimation();
+                        if (!playerAnimator.GetBool("MeleeAttack") && !playerAnimator.GetBool("RangedAttack"))
+                        {
+                                Movement();
+                                SwitchAnimation();
+                        }
                 }
         }
 
@@ -66,55 +75,72 @@ public class PlayerController : MonoBehaviour
         }
 
         #region -- MeleeAttack --
+
         void MeleeAttack()
         {
                 if (Input.GetKeyDown(KeyCode.K))
                 {
-                        playerAnimator.SetBool("MeleeAttack", true);
-                        playerRB.velocity = Vector2.zero;
+                        if (!playerAnimator.GetBool("RangedAttack"))
+                        {
+                                playerAnimator.SetBool("MeleeAttack", true);
+                                playerRB.velocity = Vector2.zero;
+                        }
                 }
         }
 
         void MeleeAttackStop()
         {
                 playerAnimator.SetBool("MeleeAttack", false);
-                canCreateFist = true;
-                Destroy(GameObject.Find("Fist(Clone)"));
         }
 
         void CreateFist()
         {
                 if (canCreateFist)
                 {
-                        GameObject.Instantiate(fist, transform);  // initialize a arrow
                         canCreateFist = false;
+                        Instantiate(fist, transform);  // initialize a arrow
                 }
         }
+
+        void AllowCreateFist()
+        {
+                canCreateFist = true;
+        }
+
         #endregion
 
         #region -- RangedAttack --
+
         void RangedAttack()
         {
                 if (Input.GetKeyDown(KeyCode.J))
                 {
-                        playerAnimator.SetBool("RangedAttack", true);
-                        playerRB.velocity = Vector2.zero;
+                        if (!playerAnimator.GetBool("MeleeAttack"))
+                        {
+                                playerAnimator.SetBool("RangedAttack", true);
+                                playerRB.velocity = Vector2.zero;
+                        }
                 }
         }
 
         void RangedAttackStop()
         {
                 playerAnimator.SetBool("RangedAttack", false);
-                canCreateArrow = true;
         }
 
         void CreateArrow()
         {
                 if (canCreateArrow)
                 {
-                        Instantiate(arrow, transform);  // initialize a arrow
                         canCreateArrow = false;
+                        Instantiate(arrow, transform);  // initialize a arrow
                 }
         }
+
+        void AllowCreateArrow()
+        {
+                canCreateArrow = true;
+        }
+
         #endregion
 }

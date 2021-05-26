@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PanelManager : MonoBehaviour
 {
@@ -9,8 +8,9 @@ public class PanelManager : MonoBehaviour
         public GameObject roomsPanel;
         public GameObject roomSettingPanel;
         public GameObject roomEnteredPanel;
-        public GameObject tipsPanel;
         public GameObject clientProperty;
+        public GameObject succeedingCanvasPrefab;
+        public GameObject succeedingCanvas;
 
         RoomEnteredPanel roomEnteredPanelScript;
         RoomsPanel roomsPanelScript;
@@ -20,13 +20,10 @@ public class PanelManager : MonoBehaviour
         bool showRoomsPanel;
         bool showRoomSettingPanel;
         bool showRoomEnteredPanel;
-        bool showTipsPanel;
-        string tips;
-        Text tipsText;
 
         void Awake()
         {
-                tipsText = tipsPanel.transform.Find("TipsBoard").GetComponentInChildren<Text>();
+                succeedingCanvas = GetSucceedingCanvas();
                 roomEnteredPanelScript = roomEnteredPanel.GetComponent<RoomEnteredPanel>();
                 roomsPanelScript = roomsPanel.GetComponent<RoomsPanel>();
         }
@@ -37,6 +34,7 @@ public class PanelManager : MonoBehaviour
                 if (gameStart)
                 {
                         DontDestroyOnLoad(clientProperty);
+                        DontDestroyOnLoad(succeedingCanvas);
                         SceneManager.LoadScene(1);
                 }
 
@@ -89,16 +87,21 @@ public class PanelManager : MonoBehaviour
                 {
                         roomEnteredPanel.SetActive(false);
                 }
+        }
 
-                // tips panel
-                if (showTipsPanel)
+        // try to get a succeedingCanvas instance
+        public GameObject GetSucceedingCanvas()
+        {
+                GameObject canvas;
+                if ((canvas = GameObject.Find("SucceedingCanvas")) != null)
                 {
-                        tipsText.text = tips;
-                        tipsPanel.SetActive(true);
+                        return canvas;
                 }
                 else
                 {
-                        tipsPanel.SetActive(false);
+                        canvas = Instantiate(succeedingCanvasPrefab);
+                        canvas.name = "SucceedingCanvas";
+                        return canvas;
                 }
         }
 
@@ -109,12 +112,6 @@ public class PanelManager : MonoBehaviour
         }
 
         #region -- Connect Panel Function --
-
-        public void ShowConnectionPanel(string tips)
-        {
-                this.tips = tips;
-                showTipsPanel = true;
-        }
 
         public void HideConnectionPanel()
         {
@@ -194,17 +191,4 @@ public class PanelManager : MonoBehaviour
 
         #endregion
 
-        #region -- Tips Panel Function --
-
-        public void ShowTipsPanel()
-        {
-                showTipsPanel = true;
-        }
-
-        public void HideTipsPanel()
-        {
-                showTipsPanel = false;
-        }
-
-        #endregion
 }

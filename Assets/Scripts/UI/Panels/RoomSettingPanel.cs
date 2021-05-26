@@ -13,10 +13,16 @@ public class RoomSettingPanel : MonoBehaviour
         public PanelManager panelManager;
 
         GameSocketClient gameSocketClient;
+        SucceedingCanvas succeedingCanvas;
 
         void Awake()
         {
                 gameSocketClient = clientProperty.GetComponent<GameSocketClient>();
+        }
+
+        void Start()
+        {
+                succeedingCanvas = panelManager.succeedingCanvas.GetComponent<SucceedingCanvas>();
         }
 
         public void SetNumberImage()
@@ -33,14 +39,14 @@ public class RoomSettingPanel : MonoBehaviour
         {
                 if (nameText.text == "")
                 {
-                        panelManager.ShowConnectionPanel("请输入房间名！");
+                        succeedingCanvas.ShowTipsPanel("请输入房间名！");
                         return;
                 }
                 RoomInfo newRoom = new RoomInfo();
                 newRoom.OwnerAddress = gameSocketClient.clientSocket.LocalEndPoint.ToString();
                 newRoom.GuestsAddressAndName = new Hashtable();
                 newRoom.GuestsAddressAndName.Add(newRoom.OwnerAddress, clientProperty.GetComponent<PlayerProperty>().playerName);
-                newRoom.MaxPlayer = (int)numberSlider.value; // work in progress
+                newRoom.MaxPlayerNumber = (int)numberSlider.value; // work in progress
                 newRoom.RoomName = nameText.text; // work in progress
                 gameSocketClient.SendObjectToServer(newRoom);
         }

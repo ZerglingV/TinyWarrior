@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FistController : MonoBehaviour
 {
@@ -8,15 +6,14 @@ public class FistController : MonoBehaviour
         Vector2 movement;
         GameObject parent;
         Animator parentAnimator;
-        Collider2D parentCollision;
         Rigidbody2D fistRB;
+        int durationTime;
 
         void Awake()
         {
                 fistRB = GetComponent<Rigidbody2D>();
                 parent = transform.parent.gameObject;
                 range = parent.GetComponent<PlayerProperty>().fistRange;
-                parentCollision = parent.GetComponent<Collider2D>();
                 parentAnimator = parent.GetComponent<Animator>();
 
                 movement.x = parentAnimator.GetFloat("Horizontal");
@@ -24,5 +21,13 @@ public class FistController : MonoBehaviour
                 movement = movement.normalized;
                 transform.localScale = Vector2.one * range;
                 fistRB.rotation = Vector2.SignedAngle(new Vector2(0f, 1f), movement); // rotation of arrow
+        }
+
+        void Update()
+        {
+                if (++durationTime >= 14)
+                {
+                        Destroy(this.gameObject);
+                }
         }
 }

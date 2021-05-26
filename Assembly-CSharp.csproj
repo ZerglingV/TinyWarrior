@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Items\ArrowController.cs" />
     <Compile Include="Assets\Scripts\Items\FistController.cs" />
     <Compile Include="Assets\Scripts\Items\PortalController.cs" />
+    <Compile Include="Assets\Scripts\Players\GhostController.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerProperty.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerUI.cs" />
@@ -75,7 +76,7 @@
     <Compile Include="Assets\Scripts\Sound Effect\LavaLargeSound.cs" />
     <Compile Include="Assets\Scripts\Sound Effect\LavaSmallSound.cs" />
     <Compile Include="Assets\Scripts\Sound Effect\PlayerSound.cs" />
-    <Compile Include="Assets\Scripts\System\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Sound Effect\VictorySound.cs" />
     <Compile Include="Assets\Scripts\System\ByteBuffer.cs" />
     <Compile Include="Assets\Scripts\System\GameManager.cs" />
     <Compile Include="Assets\Scripts\System\GameSocketClient.cs" />
@@ -84,10 +85,17 @@
     <Compile Include="Assets\Scripts\UI\InputFieldFilter.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\ConnectionPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PanelManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Panels\PausePanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\RoomEnteredPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\RoomSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\RoomsPanel.cs" />
-    <Compile Include="Assets\Scripts\UI\PingText.cs" />
+    <Compile Include="Assets\Scripts\UI\SucceedingCanvas.cs" />
+    <None Include="Assets\Download Assets\Free Pack\Tropical Moments\Tropical Moments readme.txt" />
+    <None Include="Assets\Download Assets\Free Pack\Rock Stingers Pack\Unity Readme.txt" />
+    <None Include="Assets\Download Assets\Free Pack\Door SFX Pack\Readme.txt" />
+    <None Include="Assets\Download Assets\Free Pack\Metal Loop Pack\readme Unity.txt" />
+    <None Include="Assets\Download Assets\Free Pack\Rock Loops Pack\Unity Readme.txt" />
+    <None Include="Assets\Sources\Shader\player.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Unity/Codes_Unity/TinyWarrior/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

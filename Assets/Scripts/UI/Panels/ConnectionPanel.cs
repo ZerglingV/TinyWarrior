@@ -11,16 +11,18 @@ public class ConnectionPanel : MonoBehaviour
         public InputField inputName;
 
         GameSocketClient gameSocketClient;
+        SucceedingCanvas succeedingCanvas;
         bool isConnecting;
         Thread connectThread;
         Button connectionButton;
         Text buttonText;
 
-        void Awake()
+        void Start()
         {
                 gameSocketClient = clientProperty.GetComponent<GameSocketClient>();
                 connectionButton = transform.Find("ConnectButton").GetComponent<Button>();
                 buttonText = connectionButton.GetComponentInChildren<Text>();
+                succeedingCanvas = panelManager.succeedingCanvas.GetComponent<SucceedingCanvas>();
         }
 
         void OnGUI()
@@ -48,17 +50,17 @@ public class ConnectionPanel : MonoBehaviour
         {
                 if (serverIP.text == "")
                 {
-                        panelManager.ShowConnectionPanel("请输入服务器地址！");
+                        succeedingCanvas.ShowTipsPanel("请输入服务器地址！");
                         return;
                 }
                 if (serverPort.text == "")
                 {
-                        panelManager.ShowConnectionPanel("请输入服务器端口！");
+                        succeedingCanvas.ShowTipsPanel("请输入服务器端口！");
                         return;
                 }
                 if (inputName.text == "")
                 {
-                        panelManager.ShowConnectionPanel("请输入角色名！");
+                        succeedingCanvas.ShowTipsPanel("请输入角色名！");
                         return;
                 }
                 buttonText.text = "正在连接...";
@@ -83,13 +85,13 @@ public class ConnectionPanel : MonoBehaviour
                 if (gameSocketClient.ConnectServer(serverIP.text, serverPort.text))
                 {
                         // set a UI to show connect successfully
-                        panelManager.ShowConnectionPanel("连接服务器成功！");
+                        succeedingCanvas.ShowTipsPanel("连接服务器成功！");
                         gameSocketClient.SendMsgToServer("name=" + inputName.text);
                 }
                 else
                 {
                         // set a UI to show connect unsuccessfully
-                        panelManager.ShowConnectionPanel("无法连接至服务器！");
+                        succeedingCanvas.ShowTipsPanel("无法连接至服务器！");
                 }
                 isConnecting = false;
         }
