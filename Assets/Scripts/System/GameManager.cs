@@ -52,9 +52,6 @@ public class GameManager : MonoBehaviour
 
         void Awake()
         {
-                // add events listener to tipsPanel's confirmButton, back to menu scene when disconnection
-                GameObject.Find("SucceedingCanvas/TipsPanel/ConfirmButton").GetComponent<Button>().onClick.AddListener(BackToMenuScene);
-
                 clientProperty = GameObject.Find("ClientProperty");
                 gameSocketClient = clientProperty.GetComponent<GameSocketClient>();
                 gameSocketClient.gameManager = this;

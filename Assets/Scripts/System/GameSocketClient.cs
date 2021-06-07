@@ -19,7 +19,7 @@ public class GameSocketClient : MonoBehaviour
 
         SucceedingCanvas succeedingCanvas;
         Thread receiveThread;
-        private static byte[] result = new byte[4096]; // decide how many roomsInfo and playerAction can be received
+        private static byte[] result = new byte[8192]; // decide how many roomsInfo and playerAction can be received
 
         void Start()
         {

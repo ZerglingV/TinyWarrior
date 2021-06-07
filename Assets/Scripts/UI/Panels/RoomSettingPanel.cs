@@ -27,7 +27,7 @@ public class RoomSettingPanel : MonoBehaviour
 
         public void SetNumberImage()
         {
-                numberImage.fillAmount = numberSlider.value / 10;
+                numberImage.fillAmount = numberSlider.value / 5;
         }
 
         public void SetNumberText()

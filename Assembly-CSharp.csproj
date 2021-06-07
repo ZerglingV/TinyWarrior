@@ -95,6 +95,7 @@
     <None Include="Assets\Download Assets\Free Pack\Door SFX Pack\Readme.txt" />
     <None Include="Assets\Download Assets\Free Pack\Metal Loop Pack\readme Unity.txt" />
     <None Include="Assets\Download Assets\Free Pack\Rock Loops Pack\Unity Readme.txt" />
+    <None Include="Assets\Known Bugs\Bugs Log.txt" />
     <None Include="Assets\Sources\Shader\player.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Unity/Codes_Unity/TinyWarrior/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

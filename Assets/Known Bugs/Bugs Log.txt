@@ -1,0 +1,3 @@
+known bugs:
+1. when multiple players are in a room, loose data package sometimes
+2. other players' transport-effects are not valid
