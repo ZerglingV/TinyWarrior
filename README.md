@@ -2,7 +2,7 @@
 
 A 2D multiplayer battle game made by Unity based on socket.
 
-![TinyWarrior.png](/Assets/Sources/UI/icon.png)
+![TinyWarrior.png](Assets/Sources/UI/icon.png)
 
 ## known bugs:
 
