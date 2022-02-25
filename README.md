@@ -32,31 +32,31 @@ Control your hero's movement and attack to defeat your opponent to win the game.
 
 <p align="center"><b>Room list</b></p>
 
-![TinyWarrior.png](Sample/sample1.png)
+![TinyWarrior.png](Samples/sample1.png)
 
 <p align="center"><b>Player list</b></p>
 
-![TinyWarrior.png](Sample/sample2.png)
+![TinyWarrior.png](Samples/sample2.png)
 
 <p align="center"><b>Ranged attack</b></p>
 
-![TinyWarrior.png](Sample/sample3.png)
+![TinyWarrior.png](Samples/sample3.png)
 
 <p align="center"><b>Melee attack</b></p>
 
-![TinyWarrior.png](Sample/sample4.png)
+![TinyWarrior.png](Samples/sample4.png)
 
 <p align="center"><b>Win</b></p>
 
-![TinyWarrior.png](Sample/sample5.png)
+![TinyWarrior.png](Samples/sample5.png)
 
 <p align="center"><b>Teleport</b></p>
 
-![TinyWarrior.png](Sample/sample6.png)
+![TinyWarrior.png](Samples/sample6.png)
 
 <p align="center"><b>Ghost state (Observer)</b></p>
 
-![TinyWarrior.png](Sample/sample7.png)
+![TinyWarrior.png](Samples/sample7.png)
 
 ## Known bugs
 

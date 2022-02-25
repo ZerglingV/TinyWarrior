@@ -32,31 +32,31 @@
 
 <p align="center"><b>房间列表</b></p>
 
-![TinyWarrior.png](Sample/sample1.png)
+![TinyWarrior.png](Samples/sample1.png)
 
 <p align="center"><b>玩家列表</b></p>
 
-![TinyWarrior.png](Sample/sample2.png)
+![TinyWarrior.png](Samples/sample2.png)
 
 <p align="center"><b>远程攻击</b></p>
 
-![TinyWarrior.png](Sample/sample3.png)
+![TinyWarrior.png](Samples/sample3.png)
 
 <p align="center"><b>近战攻击</b></p>
 
-![TinyWarrior.png](Sample/sample4.png)
+![TinyWarrior.png](Samples/sample4.png)
 
 <p align="center"><b>胜利</b></p>
 
-![TinyWarrior.png](Sample/sample5.png)
+![TinyWarrior.png](Samples/sample5.png)
 
 <p align="center"><b>传送</b></p>
 
-![TinyWarrior.png](Sample/sample6.png)
+![TinyWarrior.png](Samples/sample6.png)
 
 <p align="center"><b>幽灵形态（观战）</b></p>
 
-![TinyWarrior.png](Sample/sample7.png)
+![TinyWarrior.png](Samples/sample7.png)
 
 ## 已知漏洞
 
